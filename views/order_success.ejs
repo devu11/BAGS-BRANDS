@@ -1,0 +1,162 @@
+<%- include('header') -%>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+    }
+
+    .success {
+        margin-top: 8%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .success-message {
+        color: #4caf50;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .link-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .link-container a {
+        color: #007bff;
+        text-decoration: none;
+        margin: 5px;
+        padding: 8px 16px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+    }
+
+    .lnk-container a:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .summary {
+            padding: 2.5rem 1.2rem 3rem;
+        }
+
+        .product p:hover {
+            cursor: pointer;
+        }
+
+        .fa-regular.fa-file-lines {
+            color: black;
+            transition: 200ms;
+        }
+
+        .btn-outline-dark-2:hover .fa-regular.fa-file-lines {
+            color: #c96;
+            transition: 200ms;
+        }
+
+        .success-message {
+            display: flex;
+
+            justify-content: start;
+            align-items: center;
+        }
+
+        .success-message i {
+            margin-right: 5px;
+            margin-top: 4px;
+            font-size: 2rem;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            margin-top: 1.8rem;
+            margin-left: 0.3rem;
+        }
+
+        .refund-message p {
+            padding-left: 2.8rem;
+            margin-top: -13px;
+            font-size: 9pt;
+        }
+
+        h3 {
+            font-weight: 400;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            letter-spacing: -.01em;
+            margin-bottom: 1.8rem;
+        }
+
+        .product-desc-content h6 {
+            font-size: 1.8rem;
+            letter-spacing: -.01em;
+        }
+</style>
+<div class="success">
+    <div class="success-message">Order has been successful</div>
+    <div class="link-container">
+        <a href="/user_order_history_get">View Order</a>
+        <a href="/user_product_view_get">Continue Shopping</a>
+    </div>
+    <div class="product-body prduct-action-inner pt-3">
+        <h3 class="product-title mb-1">
+            <%= order.name %>
+        </h3>
+        </div>
+
+    <div class="col-lg-3">
+        <div class="summary">
+            <div class="sidebar sidebar-shop">
+                <div class="widget widget-clean">
+                    <p style="font-size: 16pt; font-weight: 600; color: #c96;">Order Summary</p>
+
+                </div>
+                <div class="product-list-action">
+                    <table class="table table-summary">
+                       
+                        <tr>
+                            <td class="order-one">Grand Total :</td>
+                            
+                            <td class="order-two" style="text-align: end;">₹ <%= details.total %>
+                            </td>
+                            <input type="hidden" id="grandTotal" value="<%= orders.amountAfterDiscount%>">
+                        </tr>
+                        <tr>
+                            <td class="order-one">Payment method :</td>
+                            <td class="order-two" id="paymentMethod">
+                                <%= details.paymentMethod %>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-summary">
+                        <h6 class="mt-2" style="color: #c96;">Delivery Address</h6>
+                        <div class="address-data">
+                            <tr>
+                                <td>Name: <br>Mobile: <br>Email: <br> Home: <br>City: <br>State:
+                                    <br>Pincode:
+                                </td>
+                                <td>
+                                    <%= address.name%><br>
+                                        <%= address.phoneNo%> <br>
+                                            <%= address.email%> <br>
+                                                <%= address.streetAddress%> <br>
+                                                    <%= address.city%> <br>
+                                                        <%= address.state%> <br>
+                                                            <%= address.pinCode%>
+                                </td>
+                            </tr>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<script src="/js/axios.min.js"></script>
+<%- include('footer') -%>
+

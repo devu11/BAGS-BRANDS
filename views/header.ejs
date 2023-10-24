@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>BAGS & BRANDS</title>
+  <meta name="description" content="description" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Favicon -->
+  <link rel="icon" href="/img/logo/favicon-32x32.jpg" />
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="/css/plugins.css" />
+  <!-- Bootstap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <!-- Main Style CSS -->
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <link rel="stylesheet" href="/assets//js/main.js">
+
+  <link rel="stylesheet" href="/assets/js/jquery.slicknav.js">
+
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.js"></script>
+
+  <style>
+    .lvl1.parent {
+      position: relative;
+    }
+
+    .lvl1.parent .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+    }
+
+    .lvl1.parent:hover .dropdown {
+      display: block;
+      padding: 5px 0;
+    }
+
+    .lvl1.parent .dropdown li {
+      display: block;
+    }
+
+    .lvl1.parent .dropdown li a {
+      color: #333333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .lvl1.parent .dropdown li a:hover {
+      color: #ff0000;
+    }
+
+    @media (max-width: 767px) {
+      .lvl1.parent .dropdown {
+        position: static;
+        display: block;
+      }
+    }
+
+.search-container{
+  border-radius: 2px solid black;
+}
+
+
+.searching{
+  width: 100px;
+  height: 30px;
+  font-size: 10px;
+  transform: translateX(-180px);
+  margin-top: 15px;
+  border-radius: 10px;
+  background-color:burlywood;
+ 
+}
+.imagefull{
+  width: 100%;
+}
+
+
+
+  </style>
+</head>
+
+<body class="template-index belle home7-shoes">
+ 
+
+
+
+
+
+    <!--End Search Form Drawer-->
+    <!--Top Header-->
+    <div class="top-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+            <p class="phone-no">
+              <i class="anm anm-phone-s"></i> +91 6282545972
+            </p>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+            <div class="text-center">
+              <p class="top-header_middle-text">Worldwide Express Shipping</p>
+            </div>
+          </div>
+          <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+            <span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>
+            <ul class="customer-links list-inline">
+              <% if(!locals.loggedIn) {%>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Create Account</a></li>
+                <% } else if (locals.loggedIn) {%>
+                  <li>
+                    <a data-isBlocked="<%= locals.isBlocked%>" href="/user_account_details_get"><i class="far fa-user"
+                        style="color: #ffffff"></i>
+                      Account</a>
+                  </li>
+                  <li><a href="/user_wishlist_get">Wishlist</a></li>
+                  <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Top Header-->
+    <!--Header-->
+    <div class="header-wrap classicHeader animated d-flex">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <!--Desktop Logo-->
+          <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+            <a href="/">
+              <img src="/img/logo/logobag1.jpeg" height="50px" alt="BAGS & BRANDS LOGO"
+                title="BAGS & BRANDS LOGO" />
+            </a>
+          </div>
+          <!--End Desktop Logo-->
+          <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+            <div class="d-block d-lg-none">
+              <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                <i class="icon anm anm-times-l"></i>
+                <i class="anm anm-bars-r"></i>
+              </button>
+            </div>
+            <!--Desktop Menu-->
+            <nav class="grid__item" id="AccessibleNav">
+              <!-- for mobile -->
+              <ul id="siteNav" class="site-nav medium center hidearrow">
+                <li class="lvl1 parent megamenu">
+                  <a href="/">Home <i class="anm anm-angle-down-l"></i></a>
+                </li>
+                <li class="lvl1 parent megamenu">
+                  <a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                  <ul class="dropdown">
+                    <%categories.forEach(category=> {%>
+                      <li>
+                        <a href="/user_category_product_view_get?category=<%= category._id%>">
+                          <%= category.categoryName%>
+                        </a>
+                      </li>
+                      <%}) %>
+                  </ul>
+                </li>
+
+                <li class="lvl1 parent megamenu">
+                  <a href="/user_product_view_get">Product <i class="anm anm-angle-down-l"></i></a>
+                </li>
+              </ul>
+            </nav>
+            <!--End Desktop Menu-->
+          </div>
+          <!--Mobile Logo-->
+          <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+          
+          </div>
+          <!--Mobile Logo-->
+          <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+            <% if(loggedIn) {%>
+              <div class="site-cart">
+                <a href="#" class="site-header__cart" title="Wallet">
+                  <i class="fa-solid fa-wallet" style="font-size: 20px; padding-right: 15px;"></i>
+                </a>
+                <a href="/user_cart_get" title="Cart">
+                  <i class="icon anm anm-bag-l" style="font-size: 20px;"></i>
+                  <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">
+                    <%= cartItemsCount%>
+                  </span>
+                </a>
+                
+                <div id="header-cart">
+                  <h3>Wallet balance: <span>
+                      <%= locals.userWallet%>
+                    </span></h3>
+                </div>
+              </div>
+
+              <%}%>
+              
+              <!-- <section class="search-container">
+                <form class="search-pro" method="get" action="/user_category_product_view_get?pro">
+                  <input class="searching fas fa-search" type="text" name="product" id="search-item" placeholder="search">
+                </form>
+              </section> -->
+            
+
+              <section class="search-container">
+                <form class="search-pro" method="get" action="/user_search">
+                  <input class="searching fas fa-search" type="text" name="q" id="search-item" placeholder="search">
+                  <!-- <button class="btn" type="submit">Search</button>  -->
+                </form>
+              </section>
+              <div id="search-results">
+                <ul id="results-list"></ul>
+              </div>
+              
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Header-->
+    <!--Mobile Menu-->
+    <div class="mobile-nav-wrapper" role="navigation">
+      <div class="closemobileMenu">
+        <i class="icon anm anm-times-l pull-right"></i> Close Menu
+      </div>
+      <ul id="MobileNav" class="mobile-nav">
+        <li class="lvl1 parent megamenu">
+          <a href="/">Home <i class="anm anm-plus-l"></i></a>
+        </li>
+        <li class="lvl1 parent megamenu">
+          <a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+          <ul class="dropdown">
+              <%categories.forEach(category=> {%>
+                  <li><a href="/user_category_product_view_get?category=<%= category._id%>">
+                          <%= category.categoryName%>
+                      </a></li>
+                  <%}) %>
+          </ul>
+      </li>
+        <li class="lvl1 parent megamenu">
+          <a href="/user_product_view_get">Product <i class="anm anm-plus-l"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!--End Mobile Menu-->
+  </div>
+</body>
+
+</html>

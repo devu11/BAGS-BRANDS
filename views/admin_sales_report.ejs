@@ -1,0 +1,215 @@
+<%-include('admin_header')-%> <%-include('admin_sidebar')-%>
+    <style>
+      .sales-report-table {
+        width: 80%;
+        /* Adjust the width as needed */
+        margin: 0 auto;
+        /* Center the table */
+        font-size: 14px;
+      }
+
+      .sales-report-table th,
+      .sales-report-table td {
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .sales-report-table th {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .sales-report-table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .filter-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .date-input {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      label {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input[type="date"] {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #555;
+      }
+
+      /* Style the date picker arrow */
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        font-size: 16px;
+        margin-left: 4px;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      /* Hide the default clear button for the date input */
+      input[type="date"]::-webkit-clear-button {
+        display: none;
+      }
+
+      /* Hide the default spin buttons for the date input */
+      input[type="date"]::-webkit-inner-spin-button,
+      input[type="date"]::-webkit-outer-spin-button {
+        display: none;
+      }
+
+      .download-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="main-content">
+      <div class="container-fluid mt-4 mt-md-5 mb-6">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="text-center text-md-start m-0">Sales Report</h3>
+          </div>
+
+          <div class="filter-container">
+            <form id="filter-form">
+              <div class="date-input">
+                <label>From: </label>
+                <input type="date" name="fromDate" id="fromDate">
+              </div>
+              <div class="date-input">
+                <label>To: </label>
+                <input type="date" name="toDate" id="toDate">
+              </div>
+              <button class="download-button" id="downloadButton">Download Report</button>
+            </form>
+          </div>
+
+          <table class="table sales-report-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Products</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% deliveredOrders.forEach(order=> { %>
+                <tr>
+                  <td>
+                    <%= order.orderId %>
+                  </td>
+                  <td>
+                    <%= order.product.map(product=> product.name).join(', ') %>
+                  </td>
+                  <td>
+                    <%= order.product.map(product=> product.quantity).join(', ') %>
+                  </td>
+                  <td>
+                    <%= order.date %>
+                  </td>
+                  <td>Rs:<%= order.amountAfterDiscount || order.total %>
+                  </td>
+                </tr>
+                <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%-include('admin_footer')-%>
+      <script src="/js/axios.min.js"></script>
+      <script>
+        // const filterForm = document.getElementById('filter-form');
+        // const fromDateInput = document.getElementById('fromDate');
+        // const toDateInput = document.getElementById('toDate');
+        // const downloadButton = document.getElementById('downloadButton');
+
+        // filterForm.addEventListener('submit', async (e) => {
+        //   e.preventDefault();
+        //   const fromDate = fromDateInput.value;
+        //   const toDate = toDateInput.value;
+
+        //   try {
+        //     // Send a GET request to the /adminSalesReportPDF endpoint with query parameters
+        //     const response = await axios.get('/admin_sales_pdf', {
+        //       params: { fromDate, toDate },
+        //       responseType: 'arraybuffer',
+        //     });
+
+        //     // Create a Blob from the response data
+        //     const blob = new Blob([response.data], { type: 'application/pdf' });
+
+        //     // Create a URL for the Blob
+        //     const url = window.URL.createObjectURL(blob);
+
+        //     // Create a link for downloading the PDF
+        //     const link = document.createElement('a');
+        //     link.href = url;
+        //     link.setAttribute('download', 'sales_report.pdf');
+
+        //     // Add the link to the document body, trigger the click, and remove it
+        //     document.body.appendChild(link);
+        //     link.click();
+        //     document.body.removeChild(link);
+        //   } catch (err) {
+        //     console.error(err);
+        //   }
+        // });
+        document.querySelector('#downloadButton').addEventListener('click', async (e) => {
+          console.log(`clickedd`);
+          e.preventDefault();
+          const fromDateInput = document.getElementById('fromDate');
+        const toDateInput = document.getElementById('toDate');
+          const fromDate = fromDateInput.value;
+          const toDate = toDateInput.value;
+
+          console.log(fromDate,toDate,`dateee`);
+
+          try {
+            console.log(222222222222);
+            // Send a GET request to the /adminSalesReportPDF endpoint with query parameters
+            const response = await axios.get('/admin_sales_pdf', {
+              params: { fromDate, toDate },
+              responseType: 'arraybuffer',
+            });
+
+
+
+            // Create a Blob from the response data
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+
+            // Create a URL for the Blob
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a link for downloading the PDF
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'sales_report.pdf');
+
+            // Add the link to the document body, trigger the click, and remove it
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } catch (err) {
+            console.error(err);
+          }
+        });
+
+      </script>

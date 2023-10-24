@@ -1,0 +1,238 @@
+<%-include('admin_header')-%> <%-include('admin_sidebar')-%>
+    <style>
+      .category-select,
+      .subCategory-select,
+      .brand-select {
+        margin-left: 22px;
+        margin-top: 8px;
+        height: 30px;
+        width: 50px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+    <div class="main-content">
+      <div class="container-fluid pb-7">
+        <div class="d-flex align-items-start mt-5">
+          <h2 class="mb-0">Add Products</h2>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 col-xl-7">
+            <form onsubmit=" addProduct(event)">
+              <div class="from-group mt-4 pt-3">
+                <label class="form-label"> Product name: </label>
+                <input type="text" class="form-control" name="name" value="" />
+                <p id="productNameError" class="text-danger"></p>
+              </div>
+
+              <div class="from-group mt-4">
+                <label class="form-label"> Product description: </label>
+                <textarea rows="4" class="form-control" name="description"></textarea>
+                <p id="productDescriptionError" class="text-danger"></p>
+              </div>
+
+              <div class="from-group mt-4">
+                <label class="form-label"> Price: </label>
+                <div class="input-group">
+                  <span class="input-group-text">₹</span>
+                  <input type="text" class="form-control" name="price" />
+                </div>
+                <p id="productPriceError" class="text-danger"></p>
+              </div>
+
+              <div class="form-group mt-4">
+                <label class="form-label">Offer price:</label>
+                <div class="input-group">
+                  <span class="input-group-text">₹</span>
+                  <input type="text" class="form-control" name="offerPrice">
+                </div>
+              </div>
+
+              <div class="from-group mt-4">
+                <label class="form-label"> Stock: </label>
+                <input type="text" class="form-control" name="stock" />
+                <p id="productStockError" class="text-danger"></p>
+              </div>
+              <div class="row mt-4">
+                <div class="col-lg-12 col-md-6 p-0">
+                  <select style="width: 180px" name="category" class="category-select">
+                    <option value="" disabled selected>Select category</option>
+
+
+                    <%category.forEach(category=> {%>
+                      <option value="<%= category._id%>">
+                        <%= category.categoryName%>
+                      </option>
+                      <%}) %>
+                  </select>
+                  <p id="categoryError" class="text-danger"></p>
+                  <div class="from-group mt-4">
+                    <label class="form-label mb-0"> Product image: </label>
+                    <p class="form-text">
+                      Upload a JPG or PNG. No larger than 1200px.
+                    </p>
+                    <div class="image-container">
+                      <input type="file" accept="image/*" class="form-control" name="image"  id="productImageInput" />
+                      <p></p>
+                      
+                  
+
+                      <input type="file" accept="image/*" class="form-control" name="image"  id="productImageInput"/>
+                      <p></p>
+                     
+                      <input type="file" accept="image/*" class="form-control" name="image"  id="productImageInput"/>
+
+                      <p></p>
+                     
+                      <input type="file" accept="image/*" class="form-control" name="image"  id="productImageInput" />
+                      <p></p>
+                      
+                      </div>
+                  
+                  </div>
+                  <p id="productImageError" class="text-danger text-left"></p>
+                  <div class="d-grid gap-3 mt-5">
+                    <button class="btn btn-primary btn-lg hover-lift-light" type="submit">
+                      Add Product
+                    </button>
+                    <button class="btn btn-link" onclick="window.location.reload()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.js"></script>
+
+    
+    <script>
+
+      async function addProduct(event) {
+        event.preventDefault();
+        event.target.querySelectorAll("p").forEach((element) => {
+          element.textContent = "";
+        });
+
+        const formData = new FormData(event.target);
+        try {
+          console.log(13);
+          document.getElementById('loader').classList.remove("visually-hidden")  //ith
+          const response = await axios.post("/admin_product_add_post", formData);
+          document.getElementById('loader').classList.add("visually-hidden")     //ith
+          console.log(response)
+          if (response.status === 200) {
+            console.log(5);
+            window.location.href = "/admin_product_view_get";
+          }
+        } catch (err) {
+          console.log(err)
+          document.getElementById('loader').classList.add("visually-hidden");
+          if (err.response.status === 400) {
+            const errors = err.response.data.error;
+            Object.keys(errors).forEach((key) => {
+              document.getElementById(key).textContent = errors[key];
+            });
+          } else {
+            alert("Something went wrong");
+          }
+        }
+      }
+
+      // document.addEventListener("DOMContentLoaded", function () {
+      //       const imageContainers = document.querySelectorAll(".image-container");
+
+      //       imageContainers.forEach(function (container) {
+      //           const input = container.querySelector("input[type='file']");
+      //           const image = container.querySelector(".cropped-image");
+      //           const croppedImageData = container.querySelector("input[name='cropped_image_data']");
+      //           const addImageButton = container.querySelector(".add-image-button");
+
+      //           const cropper = new Cropper(image, {
+      //               aspectRatio: 0, // Adjust this as needed
+      //               viewMode: 0, 
+      //               autoCropArea: 0,
+      //           });
+
+      //           input.addEventListener("change", function () {
+      //               const file = input.files[0];
+      //               if (file) {
+      //                   const reader = new FileReader();
+      //                   reader.onload = function (e) {
+      //                       image.src = e.target.result;
+      //                       cropper.replace(e.target.result);
+      //                   };
+      //                   reader.readAsDataURL(file);
+      //               }
+      //           });
+
+      //           const cropButton = container.querySelector(".crop-button");
+      //           cropButton.addEventListener("click", function () {
+      //               const croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
+      //               croppedImageData.value = croppedDataUrl;
+      //               addImageButton.disabled = false;
+      //           });
+
+      //           addImageButton.addEventListener("click", function () {
+      //               const croppedDataUrl = croppedImageData.value;
+      //               if (croppedDataUrl) {
+      //                   // You need to define where to append the cropped image, e.g., container.appendChild(croppedImageElement);
+      //                   input.value = "";
+      //                   croppedImageData.value = "";
+      //                   cropper.reset();
+      //                   addImageButton.disabled = false;
+      //               }
+      //           });
+      //       });
+      //   });
+
+
+
+
+// img validation
+
+document.addEventListener("DOMContentLoaded", function () {
+  const imageInputs = document.querySelectorAll("input[name='image']");
+
+  imageInputs.forEach(function (input) {
+    input.addEventListener("change", function () {
+      const container = this.parentElement;
+      const image = container.querySelector(".cropped-image");
+      const croppedImageData = container.querySelector("input[name='cropped_image_data']");
+      const addImageButton = container.querySelector(".add-image-button");
+      const imageError = container.querySelector(".image-error");
+
+      const cropper = new Cropper(image, {
+        aspectRatio: 0, // Adjust this as needed
+        viewMode: 0,
+        autoCropArea: 0,
+      });
+
+      const file = input.files[0];
+      if (file) {
+        if (croppedImageData.value) {
+          // An image has already been added, show an error message
+          imageError.textContent = "You can only upload one image.";
+          input.value = ""; // Clear the input field
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          image.src = e.target.result;
+          cropper.replace(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+});
+
+
+
+    </script>
+    <%-include('admin_footer') -%>

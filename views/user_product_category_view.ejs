@@ -1,0 +1,183 @@
+<%-include('header') -%>
+
+  <div class="container">
+    <div class="row" style="margin-top: 10%">
+      <!--Sidebar-->
+      <div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar filterbar">
+        <div class="closeFilter d-block d-md-none d-lg-none">
+          <i class="icon icon anm anm-times-l"></i>
+        </div>
+        <div class="sidebar_tags">
+          <!--Categories-->
+          <div class="sidebar_widget categories filter-widget">
+            <div class="widget-title">
+              <h2>Categories</h2>
+            </div>
+            <div class="widget-content">
+              <ul class="sidebar_categories">
+                <%categories.forEach(category=> {%>
+                  <li class="level1">
+                    <a href="/user_category_product_view_get?category=<%= category._id%>" class="site-nav">
+                      <%= category.categoryName%>
+                    </a>
+                  </li>
+                  <%})%>
+              </ul>
+            </div>
+          </div>
+          <!--Categories-->
+          <!--Price Filter-->
+          <div class="sidebar_widget filterBox filter-widget">
+            <div class="widget-title">
+              <h2>Price</h2>
+            </div>
+            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-min="10" data-max="2000">
+              <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+              <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+              <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+            </div>
+              <div class="row">
+                <div class="col-6">
+                  <p class="no-margin"><input id="amount" type="text" /></p>
+                </div>
+                <div class="col-6 text-right margin-25px-top">
+                  <button id="filter-button" class="btn btn-secondary btn--small">filter</button>
+                </div>
+              </div>
+          </div>
+          <!--End Price Filter-->
+        </div>
+      </div>
+      <!--End Sidebar-->
+      <!--Main Content-->
+      <div class="col-12 col-sm-12 col-md-9 col-lg-9 main-col">
+        <div class="productList">
+          <!--Toolbar-->
+          <button type="button" class="btn btn-filter d-block d-md-none d-lg-none">
+            Product Filters
+          </button>
+          <div class="toolbar">
+            <div class="filters-toolbar-wrapper">
+              <div class="row">
+                <div
+                  class="col-4 col-md-4 col-lg-4 text-center filters-toolbar__item filters-toolbar__item--count d-flex justify-content-center align-items-center">
+                  <span class="filters-toolbar__product-count">Showing: <%=totalCount%></span>
+                </div>
+                <div class="col-4 col-md-4 col-lg-4 text-right">
+                  <div class="filters-toolbar__item">
+                    <label for="SortBy" class="hidden">Sort</label>
+                    <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                      <option>Price, low to high</option>
+                      <option>Price, high to low</option>
+                    </select>
+                    <input class="collection-header__default-sort" type="hidden" value="manual" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End Toolbar-->
+          <div class="grid-products grid--view-items">
+            <div class="row">
+              <% products.forEach(product=> {%>
+                <% if(product.isVisible) {%>
+                  <div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
+                    <!-- start product image -->
+                    <div class="product-image">
+                      <!-- start product image -->
+                      <a href="/user_product_details_get/<%=product._id%>">
+                        <img class="primary blur-up lazyload" data-src="<%=product.imageUrl[0].url%>"
+                          src="<%=product.imageUrl[0].url%>" alt="image" title="product" />
+  
+                        <img class="hover blur-up lazyload" data-src="<%=product.imageUrl[0].url%>"
+                          src="<%=product.imageUrl[0].url%>" alt="image" title="product" />
+                      </a>
+  
+                      <div class="button-set">
+                        <% const wishlisted=wishlistedProduct.find((p)=> p._id.toString() === product._id.toString()) %>
+                          <% if (wishlisted) { %>
+                            <div class="wishlist-btn">
+                              <a style="cursor: pointer" class="wishlist add-to-wishlist" id="wishlist"
+                                onclick="addToWishlist(event, '<%=product._id%>')">
+                                <i class="fa-solid fa-heart" style="color: #e60505;"></i>
+                              </a>
+                            </div>
+                            <%} else {%>
+                              <div class="wishlist-btn">
+                                <a style="cursor: pointer" class="wishlist add-to-wishlist" id="wishlist"
+                                  onclick="addToWishlist(event, '<%=product._id%>')">
+                                  <i class="icon anm anm-heart-l"></i>
+                                </a>
+                              </div>
+                              <%}%>
+                      </div>
+                    </div>
+  
+                    <div class="product-details text-center">
+                      <div class="product-name">
+                        <a href="#">
+                          <%=product.name%>
+                        </a>
+                      </div>
+  
+                      <div class="product-price">
+                        <% if(product.offerPrice > 0){%>
+                          <span class="old-price">₹ <%= product.price%></span>
+                          <span class="price">₹ <%= product.offerPrice%></span>
+                        <%} else {%>
+                          <span class="price">₹ <%=product.price%></span>
+                        <%}%>
+                      </div>
+                    </div>
+                  </div>
+                <%}%>
+                <%})%>
+            </div>
+          </div>
+        </div>
+        <hr class="clear" />
+        <div class="pagination">
+          <ul>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li class="next">
+              <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%-include('footer') -%>
+  <!-- Include jQuery UI for the slider (make sure you've loaded the jQuery and jQuery UI libraries) -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- JavaScript code for the price range filter -->
+<script>
+
+$(document).ready(function() {
+  // Initialize the slider
+  $("#slider-range").slider({
+    range: true,
+    min: 10, // Set your minimum price
+    max: 10000, // Set your maximum price
+    values: [10, 10000], // Initial values for the price range
+    slide: function(event, ui) {
+      // Update the input field with the selected range
+      $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
+    }
+  });
+
+  // Add a click event handler to the "Filter" button
+  $("#filter-button").click(function() {
+    // Get the selected price range values
+    const priceRange = $("#slider-range").slider("values");
+
+    // Build the URL with the price range parameter and redirect
+    const newURL = window.location.pathname + "?priceRange=" + priceRange[0] + "-" + priceRange[1];
+    window.location.href = newURL;
+  });
+});
+
+</script>

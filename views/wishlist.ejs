@@ -1,0 +1,119 @@
+<%-include('header')-%>
+    <!--Body Content-->
+    <div id="page-content">
+        <!--Page Title-->
+        <div class="page section-header text-center">
+            <div class="page-title">
+                <div class="wrapper">
+                    <h1 class="page-width">Wish List</h1>
+                </div>
+            </div>
+        </div>
+        <!--End Page Title-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                    <form action="#">
+                        <div class="wishlist-table table-content table-responsive">
+                            <% if(wishlistedProducts && wishlistedProducts.length> 0){%>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="product-price text-center alt-font">Images</th>
+                                            <th class="product-name alt-font">Product</th>
+                                            <th class="product-price text-center alt-font">Price</th>
+                                            <th class="stock-status text-center alt-font">Stock Status</th>
+                                            <th class="product-subtotal text-center alt-font">Add to Cart</th>
+                                            <th class="product-name text-center alt-font">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% wishlistedProducts.forEach(product=> {%>
+                                            <tr id="product_<%= product.id%>">
+                                                <td class="product-thumbnail text-center">
+                                                    <a href="#"><img src="<%=product.imageUrl[0].url%>" alt=""
+                                                            title="" /></a>
+                                                </td>
+                                                <td class="product-name">
+                                                    <h4 class="no-margin"><a
+                                                            href="/user_product_details_get/<%=product._id%>">
+                                                            <%=product.name%>
+                                                        </a></h4>
+                                                </td>
+                                                <td class="product-price text-center"><span class="amount">
+                                                    ₹ <%=product.price%>
+                                                    </span>
+                                                </td>
+                                                <td class="stock text-center">
+                                                    <span class="in-stock">in stock</span>
+                                                </td>
+
+                                                <td class="product-subtotal text-center"><button type="button"
+                                                        class="btn btn-small addtocart"
+                                                        data-productid="<%= product._id%>">Add To Cart</button></td>
+
+                                                <td class="product-remove text-center" valign="middle"><a
+                                                        style="cursor: pointer;"><i
+                                                            class="icon icon anm anm-times-l wishlistremove"
+                                                            data-productid="<%= product._id%>"></i></a>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+
+                                    </tbody>
+                                </table>
+                                <%} else {%>
+                                    <h1 class="text-center">Oops No Product has been added to your wishlist</h1>
+                                    <%}%>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--End Body Content-->
+
+    <!--Footer-->
+    <%-include('footer')-%>
+
+        <script src="/js/axios.min.js"></script>
+        <script>
+            document.querySelector('.addtocart').addEventListener('click', function (event) {
+                const productid = event.target.dataset.productid;
+                addToCart(event, productid);
+            });
+
+            async function addToCart(event, productid) {
+                event.preventDefault();
+                try {
+                    const response = await axios.post(`/user_add_to_cart_post/${productid}`);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+
+            document.querySelectorAll('.wishlistremove').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    const productid = event.target.dataset.productid;
+                    wishlistRemove(event, productid);
+                })
+            });
+
+            async function wishlistRemove(event, productid) {
+                event.preventDefault();
+                try {
+                    const response = await axios.post(`/user_wishlist_remove/${productid}`);
+                    if (response.status == 200) {
+                        const wishlistProduct = document.getElementById(`product_${productid}`)
+                        if (wishlistProduct) {
+                            wishlistProduct.remove();
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        </script>

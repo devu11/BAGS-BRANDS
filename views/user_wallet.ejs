@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add your CSS styles and scripts here if needed -->
+</head>
+<body>
+    <div>
+        <h2>Wallet Payment</h2>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Payment Method</td>
+                    <td>
+                        <span>
+                            <input class="paymentSelect" type="radio" name="paymentMethod" value="wallet" onclick="toggleWallet()" />
+                            <label class="h4">Wallet</label>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Wallet Balance</td>
+                    <td>
+                        <span id="wallet-clicked" style="display: none;">
+                            Your wallet has <span id='walletBalance'><%= userWallet %></span> balance
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Insufficient Balance</td>
+                    <td>
+                        <div id="insufficient-wallet-bal" class="d-none">
+                            <p class="text-danger">Insufficient balance in your wallet</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to toggle wallet information display
+        function toggleWallet() {
+            const walletClicked = document.getElementById("wallet-clicked");
+            const walletRadio = document.querySelector('input[name="paymentMethod"][value="wallet"]:checked');
+
+            if (walletRadio.checked) {
+                walletClicked.style.display = "block";
+            } else {
+                walletClicked.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

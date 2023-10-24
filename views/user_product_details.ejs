@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>BAGS & BRANDS</title>
+    <meta name="description" content="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon -->
+    <link rel="icon" href="/img/logo/favicon-32x32.jpg" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/css/plugins.css" />
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.js"></script>
+    <style>
+        .lvl1.parent {
+            position: relative;
+        }
+
+        .lvl1.parent .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .lvl1.parent:hover .dropdown {
+            display: block;
+            padding: 5px 0;
+        }
+
+        .lvl1.parent .dropdown li {
+            display: block;
+        }
+
+        .lvl1.parent .dropdown li a {
+            color: #333333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .lvl1.parent .dropdown li a:hover {
+            color: #ff0000;
+        }
+
+        .zoompro-wrap .zoompro-span {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+
+        @media (max-width: 767px) {
+            .lvl1.parent .dropdown {
+                position: static;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body class="template-index belle home7-shoes">
+    <!-- <div id="pre-loader">
+        <img src="/img/loader.gif" alt="Loading..." />
+    </div> -->
+    <div class="pageWrapper">
+        <!--Search Form Drawer-->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="#">
+                    <button class="go-btn search__button" type="submit">
+                        <i class="icon anm anm-search-l"></i>
+                      
+                    </button>
+                    <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..."
+                        aria-label="Search" autocomplete="off" />
+                </form>
+                <button type="button" class="search-trigger close-btn">
+                    <i class="anm anm-times-l"></i>
+                </button>
+            </div>
+        </div>
+        <!--End Search Form Drawer-->
+        <!--Top Header-->
+        <div class="top-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                        <p class="phone-no">
+                            <i class="anm anm-phone-s"></i> +91 6282545972
+                        </p>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                        <div class="text-center">
+                            <p class="top-header_middle-text">Worldwide Express Shipping</p>
+                        </div>
+                    </div>
+                    <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                        <span class="user-menu d-block d-lg-none"><i class="anm anm-user-al"
+                                aria-hidden="true"></i></span>
+                        <ul class="customer-links list-inline">
+                            <% if(!locals.loggedIn) {%>
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/register">Create Account</a></li>
+                                <% } else if (locals.loggedIn) {%>
+                                    <li>
+                                        <a data-isBlocked="<%= locals.isBlocked%>" href="/user_account_details_get"><i
+                                                class="far fa-user" style="color: #ffffff"></i>
+                                            Account</a>
+                                    </li>
+                                    <li><a href="/user_wishlist_get">Wishlist</a></li>
+                                    <% } %>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Top Header-->
+        <!--Header-->
+        <div class="header-wrap classicHeader animated d-flex">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!--Desktop Logo-->
+                    <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                        <a href="/">
+                            <img src="/img/logo/logobag1.jpeg" height="50px" alt="BAGS & BRANDS LOGO"
+                                title="BAGS & BRANDS LOGO" />
+                        </a>
+                    </div>
+                    <!--End Desktop Logo-->
+                    <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                        <div class="d-block d-lg-none">
+                            <button type="button"
+                                class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                                <i class="icon anm anm-times-l"></i>
+                                <i class="anm anm-bars-r"></i>
+                            </button>
+                        </div>
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav">
+                            <!-- for mobile -->
+                            <ul id="siteNav" class="site-nav medium center hidearrow">
+                                <li class="lvl1 parent megamenu">
+                                    <a href="/">Home <i class="anm anm-angle-down-l"></i></a>
+                                </li>
+                                <!-- <li class="lvl1 parent megamenu">
+                    <a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                  </li> -->
+                                <li class="lvl1 parent megamenu">
+                                    <a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                                    <ul class="dropdown">
+                                        <%categories.forEach(category=> {%>
+                                            <li><a href="/user_category_product_view_get?category=<%= category._id%>">
+                                                    <%= category.categoryName%>
+                                                </a></li>
+                                            <%}) %>
+                                    </ul>
+                                </li>
+
+                                <li class="lvl1 parent megamenu">
+                                    <a href="/user_product_view_get">Product <i class="anm anm-angle-down-l"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--End Desktop Menu-->
+                    </div>
+                    <!--Mobile Logo-->
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                        <div class="logo">
+                            <a href="/">
+                                <img src="/img/logo/logobag1.jpeg" height="50px" alt="BAGS & BRANDS Logo"
+                                    title="BAGS & BRANDS Logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <!--Mobile Logo-->
+                    <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                        <% if(loggedIn) {%>
+                            <div class="site-cart">
+                                <a href="#" class="site-header__cart" title="Wallet">
+                                    <i class="fa-solid fa-wallet" style="font-size: 20px; padding-right: 15px;"></i>
+                                </a>
+                                <a href="/user_cart_get" title="Cart">
+                                    <i class="icon anm anm-bag-l" style="font-size: 20px;"></i>
+                                    <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">
+                                        <%= cartItemsCount%>
+                                    </span>
+                                </a>
+                                <div id="header-cart">
+                                    <h3>Wallet balance: <span>
+                                            <%= locals.userWallet%>
+                                        </span></h3>
+                                </div>
+                            </div>
+                            <%}%>
+                                <div class="site-header__search">
+                                    <button type="button" class="search-trigger">
+                                        <i class="icon anm anm-search-l"></i>
+                                    </button>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Header-->
+        <!--Mobile Menu-->
+        <div class="mobile-nav-wrapper" role="navigation">
+            <div class="closemobileMenu">
+                <i class="icon anm anm-times-l pull-right"></i> Close Menu
+            </div>
+            <ul id="MobileNav" class="mobile-nav">
+                <li class="lvl1 parent megamenu">
+                    <a href="/">Home <i class="anm anm-plus-l"></i></a>
+                </li>
+                <li class="lvl1 parent megamenu">
+                    <a href="#">Shop <i class="anm anm-angle-down-l"></i></a>
+                    <ul class="dropdown">
+                        <%categories.forEach(category=> {%>
+                            <li><a href="/user_category_product_view_get?category=<%= category._id%>">
+                                    <%= category.categoryName%>
+                                </a></li>
+                            <%}) %>
+                    </ul>
+                </li>
+                <li class="lvl1 parent megamenu">
+                    <a href="/user_product_view_get">Product <i class="anm anm-plus-l"></i></a>
+                </li>
+            </ul>
+        </div>
+        <!--End Mobile Menu-->
+    </div>
+
+
+    <!--End Mobile Menu-->
+
+    <!--Body Content-->
+    <div id="page-content">
+        <!--MainContent-->
+        <div id="MainContent" class="main-content" role="main" style="margin-top: 5%;">
+            <!--Breadcrumb-->
+            <div class="bredcrumbWrap">
+                <div class="container breadcrumbs">
+                    <a href="index.js" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>
+                        <%=product.name%>
+                    </span>
+                </div>
+            </div>
+            <!--End Breadcrumb-->
+
+            <div id="ProductSection-product-template" class="product-template__container prstyle2 container">
+                <!--#ProductSection-product-template-->
+                <div class="product-single product-single-1">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="product-details-img product-single__photos bottom">
+                                <div class="zoompro-wrap product-zoom-right pl-20">
+                                    <div class="zoompro-span">
+                                        <img class="blur-up lazyload zoompro"
+                                            data-zoom-image="<%=product.imageUrl[0].url%>" alt=""
+                                            src="<%=product.imageUrl[0].url%>" />
+                                    </div>
+                                    <div class="product-buttons">
+                                        <a href="#" class="btn prlightbox" title="Zoom"><i
+                                                class="icon anm anm-expand-l-arrows" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-thumb product-thumb-1">
+                                    <div id="gallery" class="product-dec-slider-1 product-tab-left">
+                                        <% product.imageUrl.forEach((image)=> {%>
+                                            <% if(image.isVisible) {%>
+                                                <a data-image="<%= image.url%>" data-zoom-image="<%=image.url%>"
+                                                    class="slick-slide slick-cloned" data-slick-index="-4"
+                                                    aria-hidden="true" tabindex="-1">
+                                                    <img class="blur-up lazyload" src="<%=image.url%>" alt="" />
+                                                </a>
+                                                <%}%>
+                                                    <%})%>
+
+                                    </div>
+                                </div>
+
+                                <div class="lightboximages">
+                                    <% product.imageUrl.forEach((image)=> {%>
+                                        <a href="<%=image.url%>" data-size="1462x2048"></a>
+                                        <%})%>
+
+                                </div>
+
+                            </div>
+                            <!--Product Feature-->
+                            <div class="prFeatures">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
+                                        <img src="/img/credit-card.png" alt="Safe Payment" title="Safe Payment" />
+                                        <div class="details">
+                                            <h3>Safe Payment</h3>Pay with the world's most payment methods.
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
+                                        <img src="/img/shield.png" alt="Confidence" title="Confidence" />
+                                        <div class="details">
+                                            <h3>Confidence</h3>Protection covers your purchase and personal data.
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
+                                        <img src="/img/worldwide.png" alt="Worldwide Delivery"
+                                            title="Worldwide Delivery" />
+                                        <div class="details">
+                                            <h3>Worldwide Delivery</h3>FREE &amp; fast shipping to over 200+ countries
+                                            &amp;
+                                            regions.
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 feature">
+                                        <img src="/img/phone-call.png" alt="Hotline" title="Hotline" />
+                                        <div class="details">
+                                            <h3>Hotline</h3>Talk to help line for your question on 4141 456 789, 4125
+                                            666
+                                            888
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Product Feature-->
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="product-single__meta">
+                                <h1 class="product-single__title">
+                                    <%=product.name%>
+                                </h1>
+                                <div class="product-nav clearfix">
+                                </div>
+                                <div class="prInfoRow">
+                                    <div class="product-stock">
+                                        <% if(outOfStock !='' ) {%>
+                                            <span class="outstock text-danger">
+                                                <%=outOfStock%>
+                                            </span>
+                                            <%} else {%>
+                                                <span class="instock text-success">In Stock</span>
+                                                <%}%>
+                                    </div>
+                                </div>
+                                <p class="product-single__price product-single__price-product-template">
+                                    <% if(product.offerPrice> 0){%>
+                                        <span class="visually-hidden">Regular price</span>   
+                                        <!-- ith -->
+                                        <s id="ComparePrice-product-template"><span class="money">₹<%=product.price%>
+                                            </span></s>
+                                        <span
+                                            class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
+                                            <span id="ProductPrice-product-template"><span class="money">₹
+                                                    <%=product.offerPrice%>
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <%} else {%>
+                                            <span
+                                                class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">₹
+                                                <%=product.price%>
+                                            </span>
+                                            <%}%>
+                                </p>
+                                <div class="product-single__description rte">
+                                    <p>
+                                        <%=product.description%>
+                                    </p>
+                                </div>
+                                <% if(outOfStock=='' ) {%>
+                                    <form method="" action="" id="product_form_10508262282" accept-charset="UTF-8"
+                                        class="product-form product-form-product-template hidedropdown"
+                                        enctype="multipart/form-data">
+                                        <!-- Product Action -->
+                                        <div class="product-action clearfix">
+                                            <div class="product-form__item--quantity">
+                                                <div class="wrapQtyBtn">
+                                                    <div class="qtyField">
+
+                                                        <a class="qtyBtn minus" href="javascript:void(0);"><i
+                                                                class="fa anm anm-minus-r" aria-hidden="true"></i></a>
+                                                        <input type="text" name="quantity" value="1"
+                                                            class="product-form__input qty productQuantity" readonly>
+                                                        <a class="qtyBtn plus" href="javascript:void(0);"><i
+                                                                class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-form__item--submit">
+                                                <button type="button" name="add" class="btn product-form__cart-submit"
+                                                    id="addtocart" onclick="addToCart(event, '<%=product._id%>')"
+                                                    data-productid="<%=product._id%>">
+                                                    <span>Add to cart</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                        <!-- End Product Action -->
+                                    </form>
+                                    <%}%>
+                                        <div class="display-table shareRow">
+                                            <div class="display-table-cell medium-up--one-third">
+                                                <div class="wishlist-btn">
+                                                    <a class="wishlist add-to-wishlist" href="#" id="wishlist"
+                                                        onclick="addToWishlist(event, '<%=product._id%>')"
+                                                        title="Add to Wishlist"><i class="icon anm anm-heart-l"
+                                                            aria-hidden="true"></i> <span>Add to
+                                                            Wishlist</span></a>
+                                                </div>
+                                            </div>
+                                            <div class="display-table-cell text-right">
+                                            </div>
+                                        </div>
+                            </div>
+                            <!--Product Tabs-->
+                            <div class="tabs-listing">
+                                <div class="tab-container">
+                                    <h3 class="acor-ttl active" rel="tab1">Product Details</h3>
+                                    <div id="tab1" class="tab-content">
+                                        <div class="product-description rte">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                industry.
+                                                Lorem Ipsum has been the industry's standard dummy text ever since the
+                                                1500s, when an unknown printer took a galley of type and scrambled it to
+                                                make a type specimen book. It has survived not only five centuries, but
+                                                also
+                                                the leap into electronic typesetting, remaining essentially unchanged.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <h3 class="acor-ttl" rel="tab4">Shipping &amp; Returns</h3>
+                                    <div id="tab4" class="tab-content">
+                                        <h4>Returns Policy</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros justo,
+                                            accumsan non dui sit amet. Phasellus semper volutpat mi sed imperdiet. Ut
+                                            odio
+                                            lectus, vulputate non ex non, mattis sollicitudin purus. Mauris consequat
+                                            justo
+                                            a enim interdum, in consequat dolor accumsan. Nulla iaculis diam purus, ut
+                                            vehicula leo efficitur at.</p>
+                                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In blandit nunc
+                                            enim, sit amet pharetra erat aliquet ac.</p>
+                                        <h4>Shipping</h4>
+                                        <p>Pellentesque ultrices ut sem sit amet lacinia. Sed nisi dui, ultrices ut
+                                            turpis
+                                            pulvinar. Sed fringilla ex eget lorem consectetur, consectetur blandit lacus
+                                            varius. Duis vel scelerisque elit, et vestibulum metus. Integer sit amet
+                                            tincidunt tortor. Ut lacinia ullamcorper massa, a fermentum arcu vehicula
+                                            ut. Ut
+                                            efficitur faucibus dui Nullam tristique dolor eget turpis consequat varius.
+                                            Quisque a interdum augue. Nam ut nibh mauris.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Product Tabs-->
+                        </div>
+                    </div>
+                    <!--End-product-single-->
+                </div>
+                <!--MainContent-->
+            </div>
+            <!--End Body Content-->
+
+</body>
+
+<!--Footer-->
+<footer id="footer">
+    <div class="newsletter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 w-100 d-flex justify-content-start align-items-center">
+                    <div class="display-table">
+                        <div class="display-table-cell footer-newsletter">
+                            <div class="section-header text-center">
+                                <label class="h2"><span>sign up for </span>newsletter</label>
+                            </div>
+                            <form action="#" method="post">
+                                <div class="input-group">
+                                    <input type="email" class="input-group__field newsletter__input" name="EMAIL"
+                                        value="" placeholder="Email address" required="">
+                                    <span class="input-group__btn">
+                                        <button type="submit" class="btn newsletter__submit" name="commit"
+                                            id="Subscribe"><span
+                                                class="newsletter__submit-text--large">Subscribe</span></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 d-flex justify-content-end align-items-center">
+                    <div class="footer-social">
+                        <ul class="list--inline site-footer__social-icons social-icons">
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Facebook"><i
+                                        class="icon icon-facebook"></i></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Twitter"><i
+                                        class="icon icon-twitter"></i> <span
+                                        class="icon__fallback-text">Twitter</span></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Pinterest"><i
+                                        class="icon icon-pinterest"></i> <span
+                                        class="icon__fallback-text">Pinterest</span></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Instagram"><i
+                                        class="icon icon-instagram"></i> <span
+                                        class="icon__fallback-text">Instagram</span></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Tumblr"><i
+                                        class="icon icon-tumblr-alt"></i> <span
+                                        class="icon__fallback-text">Tumblr</span></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on YouTube"><i
+                                        class="icon icon-youtube"></i> <span
+                                        class="icon__fallback-text">YouTube</span></a></li>
+                            <li><a class="social-icons__link" href="#" target="_blank"
+                                    title="Belle Multipurpose Bootstrap 4 Template on Vimeo"><i
+                                        class="icon icon-vimeo-alt"></i> <span
+                                        class="icon__fallback-text">Vimeo</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="site-footer">
+        <div class="container">
+            <!--Footer Links-->
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        <h4 class="h4">Quick Shop</h4>
+                        <ul>
+                            <li><a href="#">Women</a></li>
+                            <li><a href="#">Men</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        <h4 class="h4">Informations</h4>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Terms &amp; condition</a></li>
+                            <li><a href="#">My Account</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        <h4 class="h4">Customer Services</h4>
+                        <ul>
+                            <li><a href="#">Request Personal Data</a></li>
+                            <li><a href="#">FAQ's</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Orders and Returns</a></li>
+                            <li><a href="#">Support Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
+                        <h4 class="h4">Contact Us</h4>
+                        <ul class="addressFooter">
+                            <li><i class="icon anm anm-map-marker-al"></i>
+                                <p>99 Rocky Gateway,<br>MG Road, Bangalore</p>
+                            </li>
+                            <li class="phone"><i class="icon anm anm-phone-s"></i>
+                                <p>(440) 000 000 0000</p>
+                            </li>
+                            <li class="email"><i class="icon anm anm-envelope-l"></i>
+                                <p>bags&brands@gmail.com</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--End Footer Links-->
+            <hr>
+            <div class="footer-bottom">
+                <div class="row">
+                    <!--Footer Copyright-->
+                    <div
+                        class="col-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-0 order-lg-0 order-sm-1 copyright text-sm-center text-md-left text-lg-left">
+                        <span></span> <a href="templateshub.net">Templates Hub</a>
+                    </div>
+                    <!--End Footer Copyright-->
+                    <!--Footer Payment Icon-->
+                    <div
+                        class="col-12 col-sm-12 col-md-6 col-lg-6 order-0 order-md-1 order-lg-1 order-sm-0 payment-icons text-right text-md-center">
+                        <ul class="payment-icons list--inline">
+                            <li><i class="icon fa-brands fa-cc-visa" aria-hidden="true"></i></li>
+                            <li><i class="icon fa-brands fa-cc-mastercard" aria-hidden="true"></i></li>
+                            <li><i class="icon fa-brands fa-cc-discover" aria-hidden="true"></i></li>
+                            <li><i class="icon fa-brands fa-cc-paypal" aria-hidden="true"></i></li>
+                            <li><i class="icon fa-brands fa-cc-amex" aria-hidden="true"></i></li>
+                            <li><i class="icon fa-solid fa-credit-card" aria-hidden="true"></i></li>
+                        </ul>
+                    </div>
+                    <!--End Footer Payment Icon-->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--End Footer-->
+<!--Scoll Top-->
+<span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
+<!--End Scoll Top-->
+<!-- Including Jquery -->
+<script src="/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="/js/vendor/jquery.cookie.js"></script>
+<script src="/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/js/vendor/wow.min.js"></script>
+<!-- Including Javascript -->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/lazysizes.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/assets/js/jquery.slicknav.js " type="text/javascript"></script>
+    <script src="/assets/js/main.js" type="text/javascript"></script>
+<!-- Photoswipe Gallery -->
+<script src="/js/vendor/photoswipe.min.js"></script>
+<script src="/js/vendor/photoswipe-ui-default.min.js"></script>
+<script>
+    $(function () {
+        var $pswp = $('.pswp')[0],
+            image = [],
+            getItems = function () {
+                var items = [];
+                $('.lightboximages a').each(function () {
+                    var $href = $(this).attr('href'),
+                        $size = $(this).data('size').split('x'),
+                        item = {
+                            src: $href,
+                            w: $size[0],
+                            h: $size[1]
+                        }
+                    items.push(item);
+                });
+                return items;
+            }
+        var items = getItems();
+
+        $.each(items, function (index, value) {
+            image[index] = new Image();
+            image[index].src = value['src'];
+        });
+        $('.prlightbox').on('click', function (event) {
+            event.preventDefault();
+
+            var $index = $(".active-thumb").parent().attr('data-slick-index');
+            $index++;
+            $index = $index - 1;
+
+            var options = {
+                index: $index,
+                bgOpacity: 0.9,
+                showHideOpacity: true
+            }
+            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+            lightBox.init();
+        });
+    });
+</script>
+</div>
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close"
+                    title="Close (Esc)"></button><button class="pswp__button pswp__button--share"
+                    title="Share"></button><button class="pswp__button pswp__button--fs"
+                    title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom"
+                    title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button><button
+                class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="/js/axios.min.js"></script>
+<script>
+    ///////////////////////////////////////// ADDING TO WISHLIST ////////////////////////////////////
+    document.getElementById('wishlist').addEventListener('click', addToWishlist)
+    async function addToWishlist(event, productId) {
+        event.preventDefault();
+        try {
+            const response = await axios.post(`/user_wishlist_post/${productId}`);
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    /////////////////////////////////////////// ADD TO CART /////////////////////////////////////////////
+    async function addToCart(event, productid) {
+        event.preventDefault();
+        const quantity = document.querySelector('.product-form__input').value;
+        try {
+            const response = await axios.post(`/user_add_to_cart_post/${productid}/${quantity}`);
+            if (response.status == 200) {
+                const cartCountElement = document.getElementById('CartCount');
+                const currentCartCount = parseInt(cartCountElement.textContent);
+                const newCartCount = currentCartCount + 1;
+                cartCountElement.textContent = newCartCount;
+                setTimeout(showConfirmationDialog, 500);
+            }
+        } catch (err) {
+            if (err.response.status == 400) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Out of stock",
+                    text: "The product for this quantity is not in stock",
+                })
+                return;
+            }
+///////////////////////////////// FOR REDIRECTING TO LOGIN IF USER DIDN'T LOGIN //////////////////////////////////
+            if(err.response.status == 300){
+                window.location.href = '/login';
+            }
+
+
+            if (err.response.status == 301) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'You are Blocked',
+                    text: 'Your account has been blocked by admin.',
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#d33',
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        window.location.href = `/logout`;
+                    }
+                })
+            }
+            console.log(err);
+        }
+    }
+
+    function showConfirmationDialog() {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'The product has been added to cart',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+    const anchorTag = document.querySelector('a[data-isBlocked]');
+    const isBlockedValue = anchorTag.getAttribute('data-isBlocked');
+    if (isBlockedValue === "true") {
+        Swal.fire({
+            icon: 'warning',
+            title: 'You are Blocked',
+            text: 'Your account has been blocked by admin.',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#d33',
+        }).then(result => {
+            if (result.isConfirmed) {
+                window.location.href = `/logout`
+            }
+        });
+    }
+
+// quantity UPDATE ////////////////////////////////////////////////////
+
+    const plusButton = document.querySelector('.qtyBtn.plus');
+    const minusButton = document.querySelector('.qtyBtn.minus');
+    const quantityInput = document.querySelector('.product-form__input.qty.productQuantity');
+
+    // Add a click event listener to the plus button
+    plusButton.addEventListener('click', () => {
+        // Increment the quantity value when the plus button is clicked
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    // Add a click event listener to the minus button
+    minusButton.addEventListener('click', () => {
+        // Decrement the quantity value, but ensure it doesn't go below 1
+        const currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+</script>
+
+</html>

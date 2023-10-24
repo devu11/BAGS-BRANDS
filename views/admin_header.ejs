@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Theme styles -->
+  <link rel="stylesheet" type="text/css" href="/css/theme.min.css">
+  <link rel="icon" href="/img/logo/favicon-32x32.jpg" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE+5cnGmlw8JT03QB2+oxL100UeB6RlzZLUxCGSS4/++mNZdxw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Vendor -->
+  <link rel="stylesheet" type="text/css" href="/css/vendor.min.css">
+
+
+  <!-- Include Cropper.js library -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css"> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script> -->
+
+
+<link rel="stylesheet" href="/node_modules/cropperjs/dist/cropper.js">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJNV6J8RHQ"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.js"></script>
+
+  <link href="https://db.onlinewebfonts.com/c/1fc3df287d7a7298701e0121cb1eb236?family=Spartan+MB+SemiBold"
+    rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
+    integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js"
+    integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    .admin-link {
+      text-decoration: none;
+      color: #67c1d0;
+      border: 2px solid #6bb5ca;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .admin-link:hover {
+      background-color: #54c0ca;
+      color: #fff;
+    }
+
+    .admin-title {
+      font-size: 32px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="loader" class="spinner-border position-fixed start-50 top-50 visually-hidden" role="status"
+    style="z-index: 10;">
+    <span class="sr-only"></span>
+  </div>
+
+  <nav class="navbar navbar-vertical navbar-expand-lg navbar-light bg-white" role="navigation">
+    <div class="container-fluid">
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="#" class="admin-link">
+        <h1 class="admin-title">ADMIN</h1>
+      </a>
+
+      <div class="dropdown d-flex d-lg-none">
+        <a href="#" data-bs-toggle="dropdown">
+          <span class="avatar">
+            <img src="img/uifaces/9.jpg" class="avatar-image rounded-circle" alt="">
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="profile.html">My profile</a>
+          <a class="dropdown-item" href="account.html">Account settings</a>
+          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="sign-in.html">Log out</a>
+
+        </div>
+      </div>

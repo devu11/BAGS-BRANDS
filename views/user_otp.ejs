@@ -1,0 +1,82 @@
+<%-include('header')-%>
+
+<div id="page-content">
+  <!--Page Title-->
+  <div class="page section-header text-center">
+    <div class="page-title">
+      <div class="wrapper">
+        <h1 class="page-width">Enter the OTP</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
+        <div class="mb-4">
+          <form
+            method="post"
+            action="/user_otp"
+            id="CustomerLoginForm"
+            accept-charset="UTF-8"
+            class="contact-form"
+          >
+            <div class="row" id="inside">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="otp"
+                    placeholder="Enter the OTP"
+                    id="userOtp"
+                    class=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autofocus=""
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12 py-3">
+                <a href="#" id="otpButton" class="disabled">Resend OTP</a>
+                <span id="otpTimer">30s</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
+                <input type="submit" class="btn mb-3" value="Verify OTP" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+      <%-include('footer')-%>
+    </div>
+  </div>
+</div>
+   
+
+<script>
+  const otpTimerElement = document.getElementById('otpTimer');
+const otpButtonElement = document.getElementById('otpButton');
+let timer = 30; // Set the initial timer value in seconds
+
+function updateTimer() {
+  otpTimerElement.textContent = timer + 's';
+  if (timer > 0) {
+    timer--;
+    setTimeout(updateTimer, 1000); // Update the timer every second
+  } else {
+    // Timer has expired, enable the "Resend OTP" button
+    otpButtonElement.classList.remove('disabled');
+    otpButtonElement.href = '#'; // Set the link's href to a valid URL
+  }
+}
+
+// Start the timer when the page loads
+updateTimer();
+
+</script>

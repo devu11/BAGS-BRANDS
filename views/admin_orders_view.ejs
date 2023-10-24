@@ -1,0 +1,166 @@
+<%-include('admin_header')-%> <%-include('admin_sidebar')-%>
+        <style>
+            table.table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            table.table th,
+            table.table td {
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+
+            table.table th {
+                background-color: #f0f0f0;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            table.table td {
+                text-align: center;
+            }
+
+            table.table p {
+                margin: 0;
+            }
+
+            .tooltip1 {
+                position: relative;
+                display: inline-block;
+            }
+
+
+            .tooltip1 .tooltiptext1 {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                padding: 5px 0;
+                border-radius: 6px;
+
+
+                position: absolute;
+                z-index: 1;
+            }
+
+            .tooltip1:hover .tooltiptext1 {
+                visibility: visible;
+            }
+        </style>
+
+        <div class="main-content">
+            <div class="container-fluid mt-4 pt-2 mb-6">
+                <div id="companies" class="card mt-4">
+
+                    <div class="table-responsive table-responsive-sm">
+                        <table class="table table-sm card-table table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Order Id</th>
+                                    <th class="text-center">
+                                        Ordered Products
+                                    </th>
+                                    <th class="text-center">Ordered Date</th>
+                                    <th class="text-center">Delivery Address</th>
+                                    <th class="text-center">Total Amount</th>
+                                    <th class="text-center">Payment Method</th>
+                                    <th class="text-center">Delivery Status</th>
+                                    <th class="text-center">Order Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                <% orders.forEach(order=> {%>
+                                    <tr>
+                                        <td class="text-center">
+                                            <%= order.orderId%>
+                                        </td>
+                                        <td class="text-center">
+                                            <%order.product.forEach(product=>{%>
+                                                <p>
+                                                    <%= product.name%>
+                                                </p>
+                                                <%})%>
+                                        </td>
+                                        <td class="text-center">
+                                            <%= order.date.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }) %>
+                                        </td>
+                                       
+<!-- delivery address view more button -->
+                                        <td class="text-center">
+                                            <% users.forEach(user=> {%>
+                                                <% user.address.forEach(address=> {%>
+                                                    <% if (address._id==order.address) { %>
+                                                        <p>
+                                                        <div class="tooltip1">
+                                                            <!-- <%= address.name %> <br>
+                                                                <%= address.email %> <br> -->
+                                                                    <button class="show-address-button">view more</button> <!-- New button -->
+                                                                    <span class="tooltiptext1">
+                                                                        <%= address.phoneNo %> <br>
+                                                                            <%= address.streetAddress %> <br>
+                                                                                <%= address.city %> <br>
+                                                                                    <%= address.pinCode %> <br>
+                                                                                        <%= address.state %>
+                                                                    </span>
+                                                        </div>
+                                                        </p>
+                                                        <% } %>
+                                                            <% }) %>
+                                                                <% }) %>
+                                        </td>
+
+<!-- button ends -->
+
+                                        <td class="text-center">
+                                            <span>₹</span>
+                                            <%=order.amountAfterDiscount%>
+                                        </td>
+                                        <td class="text-center">
+                                            <%= order.paymentMethod%>
+                                        </td>
+                                        <td class="text-center">
+                                            <select class="status-select" data-order-id="<%= order._id %>">
+                                                <% const statuses=["Pending", "Shipped" , "Delivered" , "Cancelled"
+                                                    , "Returned" ]; %>
+                                                    <% statuses.forEach(status=> { %>
+                                                        <option value="<%= status %>" <%=order.status===status
+                                                            ? 'selected' : '' %>><%= status %>
+                                                        </option>
+                                                        <% }); %>
+                                            </select>
+                                        </td>
+                                        <td class="text-center">
+                                            <!-- Existing code -->
+                                            <a class="btn btn-primary" href="/admin_order_history_get/<%= order._id %>">View Order Details</a>
+                                        </td>
+                                        
+                                    </tr>
+                                    <%})%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <%-include('admin_footer')-%>
+
+            <script src="/js/axios.min.js"></script>
+           <script>
+             
+                document.querySelectorAll('.status-select').forEach(select => {
+                    select.addEventListener('change', async (event) => {
+                        try {
+                            const newStatus = event.target.value;
+                            const orderId = event.currentTarget.dataset.orderId;
+                            const response = await axios.post('/admin_order_status_post', { newStatus, orderId });
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    })
+                })
+          
+           </script>
