@@ -143,55 +143,6 @@
         }
       }
 
-      // document.addEventListener("DOMContentLoaded", function () {
-      //       const imageContainers = document.querySelectorAll(".image-container");
-
-      //       imageContainers.forEach(function (container) {
-      //           const input = container.querySelector("input[type='file']");
-      //           const image = container.querySelector(".cropped-image");
-      //           const croppedImageData = container.querySelector("input[name='cropped_image_data']");
-      //           const addImageButton = container.querySelector(".add-image-button");
-
-      //           const cropper = new Cropper(image, {
-      //               aspectRatio: 0, // Adjust this as needed
-      //               viewMode: 0, 
-      //               autoCropArea: 0,
-      //           });
-
-      //           input.addEventListener("change", function () {
-      //               const file = input.files[0];
-      //               if (file) {
-      //                   const reader = new FileReader();
-      //                   reader.onload = function (e) {
-      //                       image.src = e.target.result;
-      //                       cropper.replace(e.target.result);
-      //                   };
-      //                   reader.readAsDataURL(file);
-      //               }
-      //           });
-
-      //           const cropButton = container.querySelector(".crop-button");
-      //           cropButton.addEventListener("click", function () {
-      //               const croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
-      //               croppedImageData.value = croppedDataUrl;
-      //               addImageButton.disabled = false;
-      //           });
-
-      //           addImageButton.addEventListener("click", function () {
-      //               const croppedDataUrl = croppedImageData.value;
-      //               if (croppedDataUrl) {
-      //                   // You need to define where to append the cropped image, e.g., container.appendChild(croppedImageElement);
-      //                   input.value = "";
-      //                   croppedImageData.value = "";
-      //                   cropper.reset();
-      //                   addImageButton.disabled = false;
-      //               }
-      //           });
-      //       });
-      //   });
-
-
-
 
 // img validation
 

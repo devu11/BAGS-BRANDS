@@ -136,42 +136,6 @@
     <%-include('admin_footer')-%>
       <script src="/js/axios.min.js"></script>
       <script>
-        // const filterForm = document.getElementById('filter-form');
-        // const fromDateInput = document.getElementById('fromDate');
-        // const toDateInput = document.getElementById('toDate');
-        // const downloadButton = document.getElementById('downloadButton');
-
-        // filterForm.addEventListener('submit', async (e) => {
-        //   e.preventDefault();
-        //   const fromDate = fromDateInput.value;
-        //   const toDate = toDateInput.value;
-
-        //   try {
-        //     // Send a GET request to the /adminSalesReportPDF endpoint with query parameters
-        //     const response = await axios.get('/admin_sales_pdf', {
-        //       params: { fromDate, toDate },
-        //       responseType: 'arraybuffer',
-        //     });
-
-        //     // Create a Blob from the response data
-        //     const blob = new Blob([response.data], { type: 'application/pdf' });
-
-        //     // Create a URL for the Blob
-        //     const url = window.URL.createObjectURL(blob);
-
-        //     // Create a link for downloading the PDF
-        //     const link = document.createElement('a');
-        //     link.href = url;
-        //     link.setAttribute('download', 'sales_report.pdf');
-
-        //     // Add the link to the document body, trigger the click, and remove it
-        //     document.body.appendChild(link);
-        //     link.click();
-        //     document.body.removeChild(link);
-        //   } catch (err) {
-        //     console.error(err);
-        //   }
-        // });
         document.querySelector('#downloadButton').addEventListener('click', async (e) => {
           console.log(`clickedd`);
           e.preventDefault();

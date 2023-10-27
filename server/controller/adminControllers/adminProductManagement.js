@@ -34,7 +34,7 @@ exports.adminProductAddGet = async (req, res) => {
 };
 
 exports.adminProductAddPost = async (req, res) => {
-  console.log(11)
+
   console.log(req.body)
   const valid = validationProduct(req.body, req.files);
   try {
@@ -77,7 +77,7 @@ exports.adminProductAddPost = async (req, res) => {
       category: category,
       imageUrl: productImages,
     });
-    console.log(1111)
+    
     if (valid.isValid) {
       await product.save();
       return res.status(200).end();
@@ -241,7 +241,7 @@ exports.adminProductList = async (req, res) => {
 exports.adminProductDelete= async (req, res) => {
  
  
-    console.log(10101)
+  
       const productId = req.params.product_id;
       console.log(productId)
       const products = await product.findByIdAndDelete(productId)

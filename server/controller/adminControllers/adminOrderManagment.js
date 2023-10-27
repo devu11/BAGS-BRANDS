@@ -41,7 +41,7 @@ exports.adminOrderHistoryGet = async (req, res) => {
       const user = await Users.findOne({ email: req.session.email });
         
             if (req.session.email && !user.isBlocked) {
-              console.log(7777)
+              
               const userId = user._id;
               const order = await Orders.find({ userId: userId }).sort({ date: -1 });
               const userAddresses = user.address;
@@ -59,7 +59,7 @@ exports.adminOrderHistoryGet = async (req, res) => {
 };
 exports.adminOrderDetailsGet = async (req, res) => {
   try {
-    console.log(97643433434)
+    
     const orderId = req.query.orderId;
     const order = await Orders.findById(orderId);
       const user = await Users.findOne({ email: req.session.email });

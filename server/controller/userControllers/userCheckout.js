@@ -1,8 +1,4 @@
 
-
-
-
-
 const User = require("../../model/users");
 const Product = require("../../model/products");
 const Order = require("../../model/orders");
@@ -181,7 +177,7 @@ exports.userCheckOutPost = async (req, res) => {
         delete req.session.amountAfterDiscount;
         res.status(200).json({ orderId: req.session.orderId });
       } else if (paymentMethod == "razorPay") {
-        console.log("razor server 11111111111");
+      
         const razorpay = new Razorpay({
           key_id: process.env.KEY_ID,
           key_secret: process.env.KEY_SECRET,
@@ -244,7 +240,7 @@ exports.userCouponCheck = async (req, res) => {
       const userCart = user.cart;
       let totalAmountInCart = 0;
       userCart.forEach((product) => {
-        // totalAmountInCart += product.product.offerPrice* product.quantity;
+      
         const price = product.product.offerPrice || product.product.price; // Use offerPrice if available, else use the regular price
   totalAmountInCart += price * product.quantity;
       });
@@ -282,8 +278,8 @@ exports.userCouponCheck = async (req, res) => {
       }
 
       if (discountAmount < couponMinDiscount) {
-        console.log("111dis amnt",discountAmount)
-        console.log("222coupon min dis",couponMinDiscount)
+      
+        
         return res.status(401).json({
           error: `Minimum amount for this coupon is not reached. Please increase the price`,
         });

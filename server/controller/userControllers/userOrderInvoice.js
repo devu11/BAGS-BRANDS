@@ -11,7 +11,7 @@ const spartanMB = path.join(
 exports.userOrderInvoice = async (req, res) => {
   try {
     const orderId = req.body.orderId;
-    console.log("how sare you",orderId)
+    
     const doc = new pdfDocument({
       size: [700, 792],
     });

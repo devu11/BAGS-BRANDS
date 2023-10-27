@@ -7,7 +7,7 @@ const connectDB = require("./server/dataBase/connection")
 const nocache = require("nocache")
 const app = express()
 require("dotenv").config();
-// const PORT = process.env.PORT || 3000
+
 connectDB()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log("DB Connection error: ", err));
@@ -24,7 +24,7 @@ app.use("/uploads",express.static(path.join(__dirname, "assets/uploads")))
 app.use("/js",express.static(path.join(__dirname, "assets/js")))
 app.use(express.static(__dirname + "/assets/css"));
 const aa = path.join(__dirname, "assets/css")
-// console.log(aa)
+
 
 app.use(
     session({
