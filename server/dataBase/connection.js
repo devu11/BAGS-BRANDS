@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require('dotenv').config()
-const MONGO_URL = `mongodb://127.0.0.1:27017/studentsData`
+const MONGO_URL = `mongodb+srv://devikaadmin:Devika123*@cluster0.2ahjb8r.mongodb.net/studentsData`
 
 const connectDB = async () => {
     try {
