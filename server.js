@@ -39,5 +39,5 @@ const message = true
 app.use('/', require("./server/router/adminRouter"))
 app.use('/', require("./server/router/userRouter"))
 
-app.listen(process.env.PORT)
-// app.listen(PORT, (() => console.log(`server started at  http://localhost:${PORT}`)))
+//app.listen(process.env.PORT)
+app.listen(process.env.PORT, (() => console.log(`server started at  http://localhost:${process.env.PORT}`)))
