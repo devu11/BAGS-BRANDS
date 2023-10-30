@@ -1,124 +1,10 @@
-// const Products = require("../../model/products");
-// const User = require("../../model/users");
-// const Categories = require("../../model/category");
-
-// exports.userProductsViewGet = async (req, res) => {
-//   let result, category, sort, keyword, priceRange;
-//   let sortOption = {};
-//   const query = { isVisible: true };
-
-//   try {
-//     /////////////////////// GETTING CATEGORY IF ANY ////////////////////////////////////////////////
-//     if (req.query.category && req.query.category !== "false") {
-//       category = req.query.category;
-//     } else {
-//       category = false;
-//     }
-
-//     //////////////////////// GETTING SORT VALUE IF ANY //////////////////////
-//     if (req.query.sort && req.query.sort !== "false") {
-//       sort = req.query.sort;
-//       if (req.query.sort == "lowToHigh") {
-//         sortOption.price = 1;
-//       } else if (req.query.sort == "highToLow") {
-//         sortOption.price = -1;
-//       }
-//     } else {
-//       sort = false;
-//     }
-
-//     /////////////////////// GETTING PRICE RANGE VALID IF ANY /////////////////////
-//     if (req.query.priceRange && req.query.priceRange !== "false") {
-//       priceRange = req.query.priceRange;
-//       let priceRangeParts = priceRange.replaceAll(/₹/g, "").trim();
-//       priceRangeParts = priceRangeParts.split("-");
-//       query.price = {
-//         $gt: parseFloat(priceRangeParts[0]),
-//         $lt: parseFloat(priceRangeParts[1]),
-//       };
-//     } else {
-//       priceRange = false;
-//     }
-
-//     //////////////////////// GETTING KEYWORD IF ANY ////////////////////////////////
-//     if (req.query.keyword && req.query.keyword !== "false") {
-//       keyword = req.query.keyword;
-//       query.name = new RegExp(keyword, "i");
-//     } else {
-//       keyword = false;
-//     }
-
-//     const categories = await Categories.findOne({ categoryName: category });
-//     if (categories && categories.isAvailable) {
-//       query.category = categories._id;
-//     }
-
-//     const user = await User.findOne({ email: req.session.email });
-//     let wishlistedProduct = [];
-//     if (user) {
-//       wishlistedProduct = user.wishlist;
-//     }
-
-//     const currentPage = parseInt(req.query.page) || 1;
-//     const productsPerPage = 6;
-//     const skip = (currentPage - 1) * productsPerPage;
-
-//     const totalCount = await Products.countDocuments(query).sort();
-//     const totalPages = Math.ceil(totalCount / productsPerPage);
-//     const products = await Products.find(query)
-//       .populate({
-//         path: "category",
-//         match: { isAvailable: true },
-//         select: "_id",
-//       })
-//       .sort(sortOption)
-//       .skip(skip)
-//       .limit(productsPerPage);
-//     const filteredProducts = products.filter(
-//       (product) => product.category !== null
-//     );
-
-//     if (req.session.email) {
-//       res.render("user_product_view", {
-//         filteredProducts,
-//         loggedIn: true,
-//         totalCount,
-//         totalPages,
-//         currentPage,
-//         wishlistedProduct,
-//         category,
-//         noMoredata: Boolean(false),
-//         sort,
-//         keyword,
-//         priceRange,
-//       });
-//     } else {
-//       res.render("user_product_view", {
-//         filteredProducts,
-//         loggedIn: false,
-//         totalCount,
-//         totalPages,
-//         currentPage,
-//         wishlistedProduct,
-//         category,
-//         noMoreData: Boolean(false),
-//         sort,
-//         keyword,
-//         priceRange,
-//       });
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 
 const Products = require("../../model/products");
 const User = require("../../model/users");
 const Categories = require("../../model/category");
 
 exports.userProductsViewGet = async (req, res) => {
-  console.log(566556,req.query)
+  console.log(566556, req.query)
   let result, category, sort, keyword, priceRange;
   let sortOption = {};
   const query = { isVisible: true };
@@ -156,7 +42,7 @@ exports.userProductsViewGet = async (req, res) => {
       priceRange = false;
     }
 
-    //////////////////////// GETTING KEYWORD IF ANY ////////////////////////////////
+    //////////////////////// GETTING KEYWORD IF ANY ////////////////////////////////////////////////////////////////////
     if (req.query.keyword && req.query.keyword !== "false") {
       keyword = req.query.keyword;
       query.name = new RegExp(keyword, "i");
@@ -188,9 +74,9 @@ exports.userProductsViewGet = async (req, res) => {
       const searchResults = await Products.find({
         $text: { $search: keyword },
         isVisible: true,
-      }).then((res)=>{
-        console.log(res,33)
-      }).catch((err)=>console.log(err))
+      }).then((res) => {
+        console.log(res, 33)
+      }).catch((err) => console.log(err))
       // You can process and use searchResults in your rendering logic.
       if (searchResults?.length > 0) {
         // You have search results, use them in your rendering logic
@@ -207,7 +93,7 @@ exports.userProductsViewGet = async (req, res) => {
           keyword,
           priceRange,
         });
-        return; // Exit the function to avoid rendering the default view
+        return; 
       }
     }
 
@@ -233,7 +119,7 @@ exports.userProductsViewGet = async (req, res) => {
         totalPages,
         currentPage,
         wishlistedProduct,
-        category ,
+        category,
         noMoredata: Boolean(false),
         sort,
         keyword,
@@ -321,7 +207,7 @@ exports.userProductDetailsGet = async (req, res) => {
 
 exports.userFilterCategory = async (req, res) => {
   const categoryId = req.params.categoryid;
-  const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter or default to 1
+  const page = parseInt(req.query.page) || 1; 
   const perPage = 6;
   try {
     const totalProducts = await Products.countDocuments({
@@ -361,29 +247,29 @@ exports.createProduct = async (req, res) => {
   }
   const invalidPriceRecords = await Product.find({ price: { $type: 'string' } });
 
-for (const record of invalidPriceRecords) {
-  const validPrice = parseFloat(record.price);
-  if (!isNaN(validPrice)) {
-    record.price = validPrice;
-    await record.save();
+  for (const record of invalidPriceRecords) {
+    const validPrice = parseFloat(record.price);
+    if (!isNaN(validPrice)) {
+      record.price = validPrice;
+      await record.save();
+    }
   }
-}
 };
-exports.usersearch = async (req,res)=>{
-  try{
+exports.usersearch = async (req, res) => {
+  try {
     if (req.query.q) {
       keyword = req.query.q;
       const user = await User.findOne({ email: req.session.email });
-    let wishlistedProduct = [];
-    if (user) {
-      wishlistedProduct = user.wishlist;
-    }
+      let wishlistedProduct = [];
+      if (user) {
+        wishlistedProduct = user.wishlist;
+      }
 
       const searchResults = await Products.find({
         $text: { $search: keyword },
         isVisible: true,
-      }).then((result)=>{
-        console.log(result,33)
+      }).then((result) => {
+        console.log(result, 33)
         res.render("user_product_view", {
           filteredProducts: result,
           loggedIn: req.session.email ? true : false,
@@ -392,21 +278,21 @@ exports.usersearch = async (req,res)=>{
           currentPage: 1,
           wishlistedProduct,
           noMoreData: Boolean(false),
-          category : result.category,
+          category: result.category,
           keyword,
-          priceRange : 0,
-          sort : null
+          priceRange: 0,
+          sort: null
 
         });
-      }).catch((err)=>console.log(err))
+      }).catch((err) => console.log(err))
       // You can process and use searchResults in your rendering logic.
       if (searchResults.length > 0) {
         // You have search results, use them in your rendering logic
-        
+
         return; // Exit the function to avoid rendering the default view
       }
     }
-  }catch(err){
+  } catch (err) {
     console.error(err.message);
   }
 }
