@@ -142,7 +142,7 @@ exports.adminCategoryList = async (req, res) => {
   }
 }
 exports.adminategoryDelete= async (req, res) => {
-  console.log(101)
+  
     const categoryId = req.params.category_id;
     console.log(categoryId)
     const category= await Category.findByIdAndDelete(categoryId)
